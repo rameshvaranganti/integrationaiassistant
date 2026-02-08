@@ -84,9 +84,16 @@
             margin-bottom: 2rem;
         }
 
+        .launch-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
         .launch-button {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.75rem;
             padding: 18px 40px;
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
@@ -98,11 +105,21 @@
             box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
             border: none;
             cursor: pointer;
+            text-decoration: none;
         }
 
         .launch-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .launch-button.secondary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .launch-button.secondary:hover {
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
         }
 
         .launch-button .button-icon {
@@ -116,124 +133,19 @@
             font-style: italic;
         }
 
-        /* Popup Modal - Embedded in page */
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem 1.5rem;
+            margin-top: 2rem;
+            border-radius: 6px;
         }
 
-        .popup-overlay.active {
-            display: flex;
-        }
-
-        .popup-container {
-            width: 90%;
-            height: 85%;
-            max-width: 1200px;
-            background: white;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .popup-container.maximized {
-            width: 100%;
-            height: 100%;
-            max-width: 100%;
-            border-radius: 0;
-        }
-
-        .popup-container.minimized {
-            height: 50px;
-            overflow: hidden;
-        }
-
-        .popup-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 1rem;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            border-radius: 8px 8px 0 0;
-            user-select: none;
-            cursor: move;
-        }
-
-        .popup-container.maximized .popup-header {
-            border-radius: 0;
-        }
-
-        .popup-title {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1rem;
-            font-weight: 600;
+        .info-box p {
             margin: 0;
-        }
-
-        .window-controls {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .window-btn {
-            width: 32px;
-            height: 32px;
-            border: none;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border-radius: 4px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-            font-weight: bold;
-        }
-
-        .window-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-        }
-
-        .window-btn.minimize:hover {
-            background: #f59e0b;
-        }
-
-        .window-btn.maximize:hover {
-            background: #10b981;
-        }
-
-        .window-btn.close:hover {
-            background: #ef4444;
-        }
-
-        .popup-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .popup-iframe {
-            flex: 1;
-            border: none;
-            width: 100%;
-            height: 100%;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            line-height: 1.6;
         }
 
         .info-section {
@@ -288,26 +200,6 @@
             .launch-button {
                 width: 100%;
             }
-
-            .popup-container {
-                width: 100%;
-                height: 100%;
-                border-radius: 0;
-            }
-
-            .popup-header {
-                border-radius: 0;
-            }
-
-            .popup-title {
-                font-size: 0.9rem;
-            }
-
-            .window-btn {
-                width: 28px;
-                height: 28px;
-                font-size: 0.9rem;
-            }
         }
     </style>
 </head>
@@ -340,11 +232,23 @@
                     <div class="launch-icon">🤖</div>
                     <h2>SAP Integration AI Assistant</h2>
                     <p>Your intelligent companion for SAP CPI development, troubleshooting, and integration architecture.</p>
-                    <button onclick="openAssistantPopup()" class="launch-button">
-                        <span class="button-icon">🚀</span>
-                        Launch AI Assistant
-                    </button>
-                    <p class="launch-note">Opens in an embedded popup window</p>
+                    
+                    <div class="launch-buttons">
+                        <button onclick="openAssistantPopup()" class="launch-button">
+                            <span class="button-icon">🪟</span>
+                            Open in Popup Window
+                        </button>
+                        <a href="https://chatgpt.com/g/g-6905731791688191be5626a497a3637f-sap-integration-ai-assistant" 
+                           target="_blank" 
+                           class="launch-button secondary">
+                            <span class="button-icon">🔗</span>
+                            Open in New Tab
+                        </a>
+                    </div>
+                    
+                    <div class="info-box">
+                        <p><strong>💡 Tip:</strong> Due to ChatGPT security policies, the assistant opens in a separate window. Use "Popup Window" for a windowed experience or "New Tab" to open in your browser.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -382,31 +286,6 @@
         </div>
     </div>
 
-    <!-- Embedded Popup Window -->
-    <div id="assistantPopup" class="popup-overlay">
-        <div id="popupContainer" class="popup-container">
-            <div class="popup-header" id="popupHeader">
-                <div class="popup-title">
-                    <span>🤖</span>
-                    <span>SAP Integration AI Assistant</span>
-                </div>
-                <div class="window-controls">
-                    <button onclick="minimizePopup()" class="window-btn minimize" title="Minimize">−</button>
-                    <button onclick="toggleMaximize()" class="window-btn maximize" id="maxBtn" title="Maximize">□</button>
-                    <button onclick="closeAssistantPopup()" class="window-btn close" title="Close">×</button>
-                </div>
-            </div>
-            <div class="popup-content">
-                <iframe 
-                    id="assistantIframe"
-                    class="popup-iframe"
-                    src=""
-                    title="SAP Integration AI Assistant">
-                </iframe>
-            </div>
-        </div>
-    </div>
-
     <footer>
         <div class="container">
             <p>&copy; 2026 Ramesh Varanganti - Integration AI Assistant. All rights reserved.</p>
@@ -414,110 +293,46 @@
     </footer>
 
     <script>
-        let isMaximized = false;
-        let isMinimized = false;
-
         function openAssistantPopup() {
-            const popup = document.getElementById('assistantPopup');
-            const iframe = document.getElementById('assistantIframe');
+            const url = 'https://chatgpt.com/g/g-6905731791688191be5626a497a3637f-sap-integration-ai-assistant';
             
-            iframe.src = 'https://chatgpt.com/g/g-6905731791688191be5626a497a3637f-sap-integration-ai-assistant';
-            popup.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeAssistantPopup() {
-            const popup = document.getElementById('assistantPopup');
-            const iframe = document.getElementById('assistantIframe');
-            const container = document.getElementById('popupContainer');
+            // Get screen dimensions
+            const screenWidth = window.screen.width;
+            const screenHeight = window.screen.height;
             
-            popup.classList.remove('active');
-            iframe.src = '';
-            document.body.style.overflow = '';
+            // Calculate popup size (80% of screen)
+            const popupWidth = Math.floor(screenWidth * 0.8);
+            const popupHeight = Math.floor(screenHeight * 0.85);
             
-            // Reset states
-            isMaximized = false;
-            isMinimized = false;
-            container.classList.remove('maximized', 'minimized');
-            document.getElementById('maxBtn').textContent = '□';
-        }
-
-        function toggleMaximize() {
-            const container = document.getElementById('popupContainer');
-            const maxBtn = document.getElementById('maxBtn');
+            // Calculate center position
+            const left = Math.floor((screenWidth - popupWidth) / 2);
+            const top = Math.floor((screenHeight - popupHeight) / 2);
             
-            isMaximized = !isMaximized;
+            // Popup features
+            const features = `
+                width=${popupWidth},
+                height=${popupHeight},
+                left=${left},
+                top=${top},
+                toolbar=no,
+                menubar=no,
+                scrollbars=yes,
+                resizable=yes,
+                status=no,
+                location=no
+            `.replace(/\s+/g, '');
             
-            if (isMaximized) {
-                container.classList.add('maximized');
-                container.classList.remove('minimized');
-                maxBtn.textContent = '❐';
-                isMinimized = false;
+            // Open popup window
+            const popup = window.open(url, 'SAPIntegrationAI', features);
+            
+            // Focus on the popup
+            if (popup) {
+                popup.focus();
             } else {
-                container.classList.remove('maximized');
-                maxBtn.textContent = '□';
+                // If popup was blocked, provide fallback
+                alert('Popup was blocked! Please allow popups for this site or use the "Open in New Tab" button.');
             }
         }
-
-        function minimizePopup() {
-            const container = document.getElementById('popupContainer');
-            
-            isMinimized = !isMinimized;
-            
-            if (isMinimized) {
-                container.classList.add('minimized');
-            } else {
-                container.classList.remove('minimized');
-            }
-        }
-
-        // Draggable popup
-        let isDragging = false;
-        let currentX;
-        let currentY;
-        let initialX;
-        let initialY;
-        let xOffset = 0;
-        let yOffset = 0;
-
-        const header = document.getElementById('popupHeader');
-        const container = document.getElementById('popupContainer');
-
-        header.addEventListener('mousedown', dragStart);
-        document.addEventListener('mousemove', drag);
-        document.addEventListener('mouseup', dragEnd);
-
-        function dragStart(e) {
-            if (e.target.closest('.window-controls')) return;
-            if (isMaximized) return;
-            
-            initialX = e.clientX - xOffset;
-            initialY = e.clientY - yOffset;
-            isDragging = true;
-        }
-
-        function drag(e) {
-            if (isDragging) {
-                e.preventDefault();
-                currentX = e.clientX - initialX;
-                currentY = e.clientY - initialY;
-                xOffset = currentX;
-                yOffset = currentY;
-                
-                container.style.transform = `translate(${currentX}px, ${currentY}px)`;
-            }
-        }
-
-        function dragEnd(e) {
-            isDragging = false;
-        }
-
-        // Close on Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape' && !isMinimized) {
-                closeAssistantPopup();
-            }
-        });
     </script>
 </body>
 </html>
