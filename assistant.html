@@ -81,8 +81,82 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
-            height: calc(100vh - 280px);
             min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .assistant-launch {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .launch-card {
+            background: white;
+            border-radius: 16px;
+            padding: 4rem 3rem;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+        }
+
+        .launch-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .launch-card h2 {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .launch-card > p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .launch-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .launch-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .launch-button .button-icon {
+            font-size: 1.4rem;
+        }
+
+        .launch-note {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-style: italic;
         }
 
         .assistant-iframe {
@@ -144,8 +218,27 @@
             }
 
             .iframe-wrapper {
-                height: calc(100vh - 320px);
                 min-height: 500px;
+                padding: 1rem;
+            }
+
+            .launch-card {
+                padding: 3rem 2rem;
+            }
+
+            .launch-card h2 {
+                font-size: 1.6rem;
+            }
+
+            .launch-card > p {
+                font-size: 1rem;
+            }
+
+            .launch-button {
+                padding: 16px 32px;
+                font-size: 1.1rem;
+                width: 100%;
+                justify-content: center;
             }
 
             .nav-buttons {
@@ -193,13 +286,21 @@
 
         <div class="iframe-container">
             <div class="iframe-wrapper">
-                <iframe 
-                    src="https://chatgpt.com/g/g-6905731791688191be5626a497a3637f-sap-integration-ai-assistant" 
-                    class="assistant-iframe"
-                    title="SAP Integration AI Assistant"
-                    allow="microphone; camera"
-                    loading="lazy">
-                </iframe>
+                <div class="assistant-launch">
+                    <div class="launch-card">
+                        <div class="launch-icon">🤖</div>
+                        <h2>SAP Integration AI Assistant</h2>
+                        <p>Your intelligent companion for SAP CPI development, troubleshooting, and integration architecture.</p>
+                        <a href="https://chatgpt.com/g/g-6905731791688191be5626a497a3637f-sap-integration-ai-assistant" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="launch-button">
+                            <span class="button-icon">🚀</span>
+                            Launch AI Assistant
+                        </a>
+                        <p class="launch-note">Opens in a new window</p>
+                    </div>
+                </div>
             </div>
         </div>
 
