@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAP Integration AI Assistant - Ramesh Varanganti</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .assistant-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-top: 70px;
+        }
+
+        .assistant-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 2rem 20px;
+            text-align: center;
+        }
+
+        .assistant-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .assistant-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 10px 24px;
+            background: var(--white);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-button.secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .nav-button.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .iframe-container {
+            flex: 1;
+            width: 100%;
+            position: relative;
+            background: #f9fafb;
+            padding: 2rem 0;
+        }
+
+        .iframe-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            height: calc(100vh - 280px);
+            min-height: 600px;
+        }
+
+        .assistant-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+
+        .info-section {
+            background: var(--white);
+            padding: 2rem 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .info-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .feature-card {
+            padding: 1.5rem;
+            background: #f9fafb;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .assistant-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .assistant-header p {
+                font-size: 1rem;
+            }
+
+            .iframe-wrapper {
+                height: calc(100vh - 320px);
+                min-height: 500px;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                padding: 0 20px;
+            }
+
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <div class="logo">
+                    <h1><a href="index.html" style="color: inherit; text-decoration: none;">Integration AI Assistant</a></h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="assistant-container">
+        <div class="assistant-header">
+            <h1>🤖 SAP Integration AI Assistant</h1>
+            <p>Your intelligent companion for SAP CPI development, Groovy scripting, XSLT transformations, and integration troubleshooting</p>
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-button secondary">
+                    <span>🏠</span> Back to Home
+                </a>
+                <a href="https://chatgpt.com/g/g-6905731791688191be5626a497a3637f-sap-integration-ai-assistant" target="_blank" class="nav-button">
+                    <span>🔗</span> Open in ChatGPT
+                </a>
+            </div>
+        </div>
+
+        <div class="iframe-container">
+            <div class="iframe-wrapper">
+                <iframe 
+                    src="https://chatgpt.com/g/g-6905731791688191be5626a497a3637f-sap-integration-ai-assistant" 
+                    class="assistant-iframe"
+                    title="SAP Integration AI Assistant"
+                    allow="microphone; camera"
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <div class="info-content">
+                <h2 style="text-align: center; margin-bottom: 1rem;">What Can the AI Assistant Do?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3><span>⚙️</span> Groovy Script Optimization</h3>
+                        <p>Get help writing, debugging, and optimizing Groovy scripts for SAP CPI iFlows with best practices and performance tips.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><span>🔄</span> XSLT Transformations</h3>
+                        <p>Create and troubleshoot complex XSLT mappings for data transformations in your integration scenarios.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><span>🔍</span> iFlow Troubleshooting</h3>
+                        <p>Diagnose and resolve issues in SAP CPI integration flows with step-by-step guidance and root cause analysis.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><span>📐</span> Architecture Design</h3>
+                        <p>Receive expert guidance on integration patterns, architecture decisions, and best practices for SAP BTP.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><span>📚</span> API Development</h3>
+                        <p>Design and implement RESTful and SOAP APIs with proper error handling, security, and documentation.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><span>🎯</span> Best Practices</h3>
+                        <p>Learn enterprise integration patterns, security standards, and production-ready implementation techniques.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Ramesh Varanganti - Integration AI Assistant. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
