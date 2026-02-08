@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -115,7 +116,7 @@
             font-style: italic;
         }
 
-        /* Popup Modal */
+        /* Popup Modal - Embedded in page */
         .popup-overlay {
             display: none;
             position: fixed;
@@ -123,69 +124,116 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.7);
             z-index: 9999;
-        }
-
-        .popup-overlay.active {
-            display: flex;
             align-items: center;
             justify-content: center;
         }
 
+        .popup-overlay.active {
+            display: flex;
+        }
+
         .popup-container {
-            width: 95%;
-            height: 95%;
-            max-width: 1400px;
-            max-height: 900px;
+            width: 90%;
+            height: 85%;
+            max-width: 1200px;
             background: white;
-            border-radius: 12px;
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .popup-container.maximized {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            border-radius: 0;
+        }
+
+        .popup-container.minimized {
+            height: 50px;
+            overflow: hidden;
         }
 
         .popup-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid #e5e7eb;
-            background: #f9fafb;
-            border-radius: 12px 12px 0 0;
-        }
-
-        .popup-header h3 {
-            margin: 0;
-            color: var(--text-dark);
-            font-size: 1.2rem;
-        }
-
-        .close-button {
-            background: #ef4444;
-            border: none;
-            font-size: 1.5rem;
+            padding: 0.75rem 1rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
+            border-radius: 8px 8px 0 0;
+            user-select: none;
+            cursor: move;
+        }
+
+        .popup-container.maximized .popup-header {
+            border-radius: 0;
+        }
+
+        .popup-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .window-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 4px;
             cursor: pointer;
-            padding: 8px 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 6px;
+            font-size: 1rem;
             transition: all 0.2s ease;
-            font-weight: 600;
+            font-weight: bold;
         }
 
-        .close-button:hover {
-            background: #dc2626;
-            transform: scale(1.05);
+        .window-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .window-btn.minimize:hover {
+            background: #f59e0b;
+        }
+
+        .window-btn.maximize:hover {
+            background: #10b981;
+        }
+
+        .window-btn.close:hover {
+            background: #ef4444;
+        }
+
+        .popup-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
         .popup-iframe {
             flex: 1;
             border: none;
-            border-radius: 0 0 12px 12px;
             width: 100%;
+            height: 100%;
         }
 
         .info-section {
@@ -250,6 +298,16 @@
             .popup-header {
                 border-radius: 0;
             }
+
+            .popup-title {
+                font-size: 0.9rem;
+            }
+
+            .window-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -286,7 +344,7 @@
                         <span class="button-icon">🚀</span>
                         Launch AI Assistant
                     </button>
-                    <p class="launch-note">Opens in a popup overlay</p>
+                    <p class="launch-note">Opens in an embedded popup window</p>
                 </div>
             </div>
         </div>
@@ -324,18 +382,28 @@
         </div>
     </div>
 
-    <div id="assistantPopup" class="popup-overlay" onclick="closePopupOnOverlay(event)">
-        <div class="popup-container">
-            <div class="popup-header">
-                <h3>🤖 SAP Integration AI Assistant</h3>
-                <button onclick="closeAssistantPopup()" class="close-button">Close ×</button>
+    <!-- Embedded Popup Window -->
+    <div id="assistantPopup" class="popup-overlay">
+        <div id="popupContainer" class="popup-container">
+            <div class="popup-header" id="popupHeader">
+                <div class="popup-title">
+                    <span>🤖</span>
+                    <span>SAP Integration AI Assistant</span>
+                </div>
+                <div class="window-controls">
+                    <button onclick="minimizePopup()" class="window-btn minimize" title="Minimize">−</button>
+                    <button onclick="toggleMaximize()" class="window-btn maximize" id="maxBtn" title="Maximize">□</button>
+                    <button onclick="closeAssistantPopup()" class="window-btn close" title="Close">×</button>
+                </div>
             </div>
-            <iframe 
-                id="assistantIframe"
-                class="popup-iframe"
-                src=""
-                title="SAP Integration AI Assistant">
-            </iframe>
+            <div class="popup-content">
+                <iframe 
+                    id="assistantIframe"
+                    class="popup-iframe"
+                    src=""
+                    title="SAP Integration AI Assistant">
+                </iframe>
+            </div>
         </div>
     </div>
 
@@ -346,6 +414,9 @@
     </footer>
 
     <script>
+        let isMaximized = false;
+        let isMinimized = false;
+
         function openAssistantPopup() {
             const popup = document.getElementById('assistantPopup');
             const iframe = document.getElementById('assistantIframe');
@@ -358,20 +429,92 @@
         function closeAssistantPopup() {
             const popup = document.getElementById('assistantPopup');
             const iframe = document.getElementById('assistantIframe');
+            const container = document.getElementById('popupContainer');
             
             popup.classList.remove('active');
             iframe.src = '';
             document.body.style.overflow = '';
+            
+            // Reset states
+            isMaximized = false;
+            isMinimized = false;
+            container.classList.remove('maximized', 'minimized');
+            document.getElementById('maxBtn').textContent = '□';
         }
 
-        function closePopupOnOverlay(event) {
-            if (event.target.id === 'assistantPopup') {
-                closeAssistantPopup();
+        function toggleMaximize() {
+            const container = document.getElementById('popupContainer');
+            const maxBtn = document.getElementById('maxBtn');
+            
+            isMaximized = !isMaximized;
+            
+            if (isMaximized) {
+                container.classList.add('maximized');
+                container.classList.remove('minimized');
+                maxBtn.textContent = '❐';
+                isMinimized = false;
+            } else {
+                container.classList.remove('maximized');
+                maxBtn.textContent = '□';
             }
         }
 
+        function minimizePopup() {
+            const container = document.getElementById('popupContainer');
+            
+            isMinimized = !isMinimized;
+            
+            if (isMinimized) {
+                container.classList.add('minimized');
+            } else {
+                container.classList.remove('minimized');
+            }
+        }
+
+        // Draggable popup
+        let isDragging = false;
+        let currentX;
+        let currentY;
+        let initialX;
+        let initialY;
+        let xOffset = 0;
+        let yOffset = 0;
+
+        const header = document.getElementById('popupHeader');
+        const container = document.getElementById('popupContainer');
+
+        header.addEventListener('mousedown', dragStart);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', dragEnd);
+
+        function dragStart(e) {
+            if (e.target.closest('.window-controls')) return;
+            if (isMaximized) return;
+            
+            initialX = e.clientX - xOffset;
+            initialY = e.clientY - yOffset;
+            isDragging = true;
+        }
+
+        function drag(e) {
+            if (isDragging) {
+                e.preventDefault();
+                currentX = e.clientX - initialX;
+                currentY = e.clientY - initialY;
+                xOffset = currentX;
+                yOffset = currentY;
+                
+                container.style.transform = `translate(${currentX}px, ${currentY}px)`;
+            }
+        }
+
+        function dragEnd(e) {
+            isDragging = false;
+        }
+
+        // Close on Escape key
         document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
+            if (event.key === 'Escape' && !isMinimized) {
                 closeAssistantPopup();
             }
         });
