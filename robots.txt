@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rameshvaranganti.github.io/integrationaiassistant/sitemap.xml
